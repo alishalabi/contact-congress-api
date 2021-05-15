@@ -18,7 +18,7 @@ type bioInfo struct {
   term string `json:"term_end"`
   website string `json:"website"`
   facebook string `json:"facebook_url"`
-  twitter sting `json:"twitter_url"`
+  twitter string `json:"twitter_url"`
   photo string `json:"photo_url"`
 }
 
