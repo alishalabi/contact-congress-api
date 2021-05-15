@@ -10,9 +10,12 @@ Todo:
 
 import (
   "fmt"
+  "os"
+  "encoding/json"
+  "io/ioutil"
 )
 
-type bioInfo struct {
+type Senator struct {
   name string `json:"name"`
   state string `json:"state_name"`
   term string `json:"term_end"`
@@ -23,5 +26,23 @@ type bioInfo struct {
 }
 
 func main(){
-  fmt.Println("Hello World")
+  jsonFile, err := os.Open("bioguide_sample.json")
+
+  if err != nil {
+    fmt.Println(err)
+  }
+  fmt.Println("Opened bioguide_sample.json")
+  defer jsonFile.Close()
+
+  byteValue, _ := ioutil.ReadAll(jsonFile)
+
+  // var senators Senator
+  var senators map[string]interface{}
+  json.Unmarshal([]byte(byteValue), &senators)
+  if err != nil {
+    fmt.Println(err)
+  }
+
+  fmt.Print(senators)
+
 }
